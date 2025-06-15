@@ -1,0 +1,74 @@
+!!! CLASS Main !!!
+
+package Main;
+
+import java.io.FileNotFoundException;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		try {
+			ReplaceAB proccesor = new ReplaceAB();
+			proccesor.readToFile();
+			proccesor.updatearray();
+			proccesor.saveToFile();
+			
+			System.out.println("Программа выполнена успешно!");
+		} catch (FileNotFoundException e) {
+			System.out.println("Файл не найден: " + e.getMessage());
+			e.printStackTrace();
+		}catch (Exception e) {
+            System.out.println("Неизвестная ошибка: " + e.getMessage());
+        }
+	}
+
+}
+
+
+
+!!! CLASS ReplaceAB !!!
+
+package Main;
+
+import java.util.*;
+import java.io.*;
+
+public class ReplaceAB {
+
+	private int A;
+	private int B;
+	private int N;
+	private int[] array;
+	
+	public void readToFile() throws FileNotFoundException {
+		Scanner fileScanner = new Scanner(new File("C:\\temp\\input.txt"));
+		A = fileScanner.nextInt();
+		B = fileScanner.nextInt();
+		N = fileScanner.nextInt();
+		
+		array = new int[N];
+		for(int i = 0; i < N; i++) {
+			array[i] = fileScanner.nextInt();
+		}
+		
+		fileScanner.close();
+	}
+	
+	public void updatearray() {
+		int temp = array[A];
+		
+		array[A] = array[B];
+		array[B] = temp;
+	}
+	
+	
+	public void saveToFile() throws FileNotFoundException {
+		PrintWriter writer = new PrintWriter(new File("C:\\temp\\output.txt"));
+		for(int i = 0; i < N; i++) {
+			writer.print(array[i] + " ");
+		}
+		
+		writer.close();
+	}
+}
