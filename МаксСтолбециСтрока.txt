@@ -1,0 +1,81 @@
+!!класс Main!!
+import java.io.FileNotFoundException;
+
+import Main.MaxStrMaxStl;
+
+public class Main {
+	public static void main(String[] args) {	
+		try {
+
+			MaxStrMaxStl proccesor = new MaxStrMaxStl();
+			proccesor.readToFile();
+			proccesor.searcMaxEl();
+			proccesor.saveToFile();
+            
+            System.out.println("Обработка завершена успешно!");
+
+        } catch (FileNotFoundException e) {
+            System.err.println("Ошибка: файл не найден. " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Неизвестная ошибка: " + e.getMessage());
+        }
+    }
+		// TODO Auto-generated method stub
+
+
+}
+
+
+!!класс MaxStrMaxStl!!
+
+package Main;
+
+import java.io.*;
+import java.util.*;
+
+public class MaxStrMaxStl {
+
+	private int A;
+	private int B;
+	private int[][]matrix;
+	
+	public int maxSTR;
+	public int maxSTL;
+	
+	
+	public void readToFile() throws FileNotFoundException {
+		Scanner fileScanner = new Scanner(new File("C:\\temp\\input.txt"));
+		A = fileScanner.nextInt();
+		B = fileScanner.nextInt();
+		
+		matrix = new int[A][B];
+		for(int i = 0; i < A; i++) {
+			for(int j = 0; j < B; j++) {
+				matrix[i][j] = fileScanner.nextInt();	
+			}
+		}
+		
+		fileScanner.close();
+	}
+	
+	public void searcMaxEl() {
+		int maxel = matrix[0][0];
+		for(int i = 0; i < A; i++) {
+			for(int j = 0; j < B; j++) {
+				if(matrix[i][j] > maxel) {
+					maxel = matrix[i][j];
+					maxSTR = i;
+					maxSTL = j;
+				}
+				
+			}
+		}
+		
+	}
+	
+	public void saveToFile() throws FileNotFoundException {
+		PrintWriter writer = new PrintWriter(new File ("C:\\temp\\output.txt"));
+		writer.println((maxSTR + 1) + " " + (maxSTL+1)); // +1 для того чтобы с 1 была индексация, если по стандарту ( с нуля, то убираем +1))
+		writer.close();
+	}
+}
