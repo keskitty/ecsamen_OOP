@@ -39,8 +39,8 @@ public class MaxStrMaxStl {
 	private int B;
 	private int[][]matrix;
 	
-	public int maxSTR;
-	public int maxSTL;
+	private int maxSTR;
+	private int maxSTL;
 	
 	
 	public void readToFile() throws FileNotFoundException {
